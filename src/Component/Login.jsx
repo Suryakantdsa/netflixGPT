@@ -1,25 +1,88 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { useCheckValidate } from "../utils/useCheckValidate";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setisSignInForm] = useState(true);
-  const [errorMessage,setErrorMessage]=useState(null)
-  const email=useRef(null)
-  const password=useRef(null)
-  const fullname=useRef(null)
-const handleButtonCLick=()=>{
-    const message=useCheckValidate(email.current.value,password.current.value)
-    setErrorMessage(message)
-    console.log(message)
-    if(isSignInForm){
-        console.log(email.current.value,"-",password.current.value)
-    }
-    else{
-        console.log(email.current.value,"-",password.current.value," ", fullname.current.value)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const email = useRef(null);
+  const password = useRef(null);
+  const fullname = useRef(null);
+  const handleButtonCLick = () => {
+    setErrorMessage(null);
+    const message = useCheckValidate(
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(message);
+    if (!isSignInForm) {
+      //sign up user with email,password and fullname
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // console.log(user);
+          updateProfile(user, {
+            displayName: fullname.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/118671953?v=4",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              alert("Account created sucessfully...👍👍")
+              navigate("/");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " + " + errorMessage);
+        });
+    } else {
+      // sigin with email and password
 
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          // console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " + " + errorMessage);
+        });
     }
-}
+  };
 
   return (
     <div>
@@ -30,9 +93,9 @@ const handleButtonCLick=()=>{
           alt="background-img"
         />
       </div>
-      <form 
-      onSubmit={(e)=>e.preventDefault()}
-      className="absolute w-3/12  right-0 left-0 bg-black bg-opacity-80 my-28 mx-auto text-white rounded-lg p-12">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="absolute w-3/12  right-0 left-0 bg-black bg-opacity-80 my-28 mx-auto text-white rounded-lg p-12">
         <h1 className="text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
@@ -45,20 +108,20 @@ const handleButtonCLick=()=>{
           />
         )}
         <input
-        ref={email}
+          ref={email}
           type="text"
           placeholder="Email or Phone Number"
           className="w-full  p-4 my-4 bg-gray-700"
         />
         <input
-        ref={password}
+          ref={password}
           type="password"
           placeholder="Password"
           className="w-full  p-4 my-4 bg-gray-700"
         />
-        <button 
-        onClick={handleButtonCLick}
-        className="w-full p-4 my-6 bg-red-600 font-bold rounded-sm">
+        <button
+          onClick={handleButtonCLick}
+          className="w-full p-4 my-6 bg-red-600 font-bold rounded-sm">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         {<p className="p-2 text-red-500 font-bold "> {errorMessage}</p>}

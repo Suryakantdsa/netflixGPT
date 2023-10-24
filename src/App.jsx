@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Body from './Component/Body'
 import { Provider } from 'react-redux'
 import appStore from './utils/appStore'
