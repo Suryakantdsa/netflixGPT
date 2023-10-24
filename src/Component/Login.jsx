@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
-import { useCheckValidate } from "../utils/useCheckValidate";
+import { useCheckValidate } from "../hooks/useCheckValidate";
 import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../store/userSlice";
 import { BACKGROUND_IMG, PROFILE_AVATAR } from "../utils/constant";
 
 const Login = () => {
@@ -63,7 +63,6 @@ const Login = () => {
         });
     } else {
       // sigin with email and password
-
       signInWithEmailAndPassword(
         auth,
         email.current.value,

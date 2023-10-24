@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { LOGO, PROFILE_AVATAR } from "../utils/constant";
-import { addUser, removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../store/userSlice";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -38,7 +38,6 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        console.log("not working")
         navigate("/browse")
       } else {
         // User is signed out
@@ -70,7 +69,7 @@ const Header = () => {
               src={PROFILE_AVATAR}
               alt="User Icon"
             />
-            <span className="font-bold text-xl pl-4 cursor-pointer">{user.displayName}</span>
+            <span className="font-bold text-xl text-white pl-4 cursor-pointer">{user.displayName}</span>
           </div>
           {isDropdownOpen && (
             <select
