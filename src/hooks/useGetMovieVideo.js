@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { API_OPTIONS } from "../utils/constant";
 import { addTrailerVideo } from "../store/moviesSlice";
 import { useEffect } from "react";
+import API_OPTIONS from "../utils/constant";
 
 const useGetMovieVideo = (movieId) => {
   const dispatch = useDispatch();
