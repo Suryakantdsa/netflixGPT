@@ -7,14 +7,13 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BACKGROUND_IMG, PROFILE_AVATAR } from "../utils/constant";
 
 const Login = () => {
   const [isSignInForm, setisSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
@@ -39,7 +38,7 @@ const Login = () => {
           // console.log(user);
           updateProfile(user, {
             displayName: fullname.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/118671953?v=4",
+            photoURL: PROFILE_AVATAR,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -51,8 +50,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              alert("Account created sucessfully...👍👍")
-              navigate("/");
+              alert("Account created sucessfully...👍👍");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -73,8 +71,6 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          // console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -88,10 +84,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/a73c4363-1dcd-4719-b3b1-3725418fd91d/fe1147dd-78be-44aa-a0e5-2d2994305a13/IN-en-20231016-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
-          alt="background-img"
-        />
+        <img src={BACKGROUND_IMG} alt="background-img" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}

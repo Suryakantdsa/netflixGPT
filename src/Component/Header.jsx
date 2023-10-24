@@ -1,12 +1,15 @@
-import { signOut } from "firebase/auth";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { LOGO, PROFILE_AVATAR } from "../utils/constant";
+import { addUser, removeUser } from "../utils/userSlice";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate=useNavigate()
+  const dispatch=useDispatch()
   const user = useSelector((store) => store.user);
 
   const toggleDropdown = () => {
@@ -15,20 +18,45 @@ const Header = () => {
   const handleSignOut=(e)=>{
    if(e.target.value==="Signout"){
     signOut(auth).then(() => {
-      navigate("/")
+    
     }).catch((error) => {
       // An error happened.
-      alert(error)
+      navigate("/error")
     });
    }
   }
+  useEffect(() => {
+   const unsubscribe= onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in,
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        console.log("not working")
+        navigate("/browse")
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate("/")
+      }
+    });
+
+    return ()=>unsubscribe()
+
+  }, []);
 
   return (
     <div className="absolute z-10 bg-gradient-to-b from-black w-full p-4 flex justify-between items-center">
       <div>
         <img
           className="w-44"
-          src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+          src={LOGO}
           alt="Netflix Logo"
         />
       </div>
@@ -39,7 +67,7 @@ const Header = () => {
             onClick={toggleDropdown}>
             <img
               className="w-12 h-12 rounded-full cursor-pointer"
-              src="https://avatars.githubusercontent.com/u/118671953?v=4"
+              src={PROFILE_AVATAR}
               alt="User Icon"
             />
             <span className="font-bold text-xl pl-4 cursor-pointer">{user.displayName}</span>
