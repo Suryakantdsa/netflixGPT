@@ -5,7 +5,6 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { LOGO, PROFILE_AVATAR } from "../utils/constant";
 import { addUser, removeUser } from "../store/userSlice";
-
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate=useNavigate()

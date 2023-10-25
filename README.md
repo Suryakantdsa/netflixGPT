@@ -1,3 +1,18 @@
+# Movies recomandation with AI.
+
+# Setup
+Install react app using create-react-app (CRA)
+npm create vite@latest netflix-gpt
+
+Create .env file and put configure
+VITE_REACT_APP_TMDB_KEY = YOUR_APPLICATION_TMDB_KEY; 
+
+
+# Install and init tailwind css
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+
 - Create React App
 - Configured TailwindCSS 
 - Header

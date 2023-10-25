@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 process.env
-# .env
+.env
 # .env.production
 
 # Editor directories and files

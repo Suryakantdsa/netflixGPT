@@ -11,7 +11,6 @@ const useGetMovieVideo = (movieId) => {
       API_OPTIONS
     );
     const json = await data.json();
-    // console.log(json.results)
     const videosArray = json.results;
 
     const filterVideo = videosArray?.filter(
@@ -19,7 +18,6 @@ const useGetMovieVideo = (movieId) => {
     );
 
     const movieTrailer = filterVideo.length ? filterVideo[0] : videosArray[0];
-    // console.log(movieTrailer)
     dispatch(addTrailerVideo(movieTrailer));
   };
 
