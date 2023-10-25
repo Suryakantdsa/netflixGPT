@@ -2,8 +2,8 @@ import React from 'react'
 
 const VideoTitle = ({title,overview}) => {
   return (
-    <div className="w-full aspect-video pt-[15%] px-24 absolute text-white bg-gradient-to-r from-black">
-        <h1 className='text-5xl font-bold my-6'>{title}</h1>
+    <div className="w-full aspect-video pt-[15%] pl-10 absolute text-gray-300 bg-gradient-to-r from-black">
+        <h1 className='text-6xl font-bold my-6'>{title}</h1>
         <p className='w-1/3'>{overview.slice(0,200)+"...."}</p>
         <div className='my-4 '>
             <button className='bg-white text-black px-6 py-3 rounded-md hover:bg-opacity-90'> ▶ {" "} Play</button>

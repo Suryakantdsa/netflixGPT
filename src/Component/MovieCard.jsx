@@ -3,8 +3,9 @@ import { IMG_TMDB_URL } from "../utils/constant";
 
 const MovieCard = ({ posterPath }) => {
   return (
-    <div className="w-48 pr-6">
+    <div className="w-48 pr-6 ">
          <img
+         className="rounded-md"
           src={IMG_TMDB_URL+posterPath}
           alt="MovieCards"
         />
