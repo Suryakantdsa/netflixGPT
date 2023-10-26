@@ -53,6 +53,7 @@ npx tailwindcss init -p
 - useuseTopRatedMovie custom hook
 - BUILD GPT Search Page
 - BUILD GPT Search Bar
+- Bigfeature:implement the multi language feature in GPTsearchbar
 
 
 
