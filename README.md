@@ -51,6 +51,8 @@ npx tailwindcss init -p
 - usePopularMovies Custom hook
 - useupComingMovie custom hook
 - useuseTopRatedMovie custom hook
+- BUILD GPT Search Page
+- BUILD GPT Search Bar
 
 
 
