@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { LOGO, PROFILE_AVATAR } from "../utils/constant";
+import { LANGUAGE_SUPPORTED, LOGO, PROFILE_AVATAR } from "../utils/constant";
 import { addUser, removeUser } from "../store/userSlice";
 import { toggleGPTpage } from "../store/gptSlice";
+import { changeLanguage } from "../store/appConfigSlice";
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
@@ -57,7 +58,10 @@ const Header = () => {
     setIsDropdownOpen(!isDropdownOpen);
     setIsLangDropdownOpen(false);
   };
-  const handleLanguageChange = () => {};
+  const handleLanguageChange = (lang) => {
+    setIsLangDropdownOpen(false)
+    dispatch(changeLanguage(lang))
+  };
 
   return (
     <div className="absolute z-10 bg-gradient-to-b from-black w-full p-4 flex justify-between items-center">
@@ -65,10 +69,12 @@ const Header = () => {
         <img className="w-44" src={LOGO} alt="Netflix Logo" />
       </div>
       {user && (
-        <div className="relative mr-4 flex justify-between items-center w-[35%] text-white">
-          <div className="relative LANGUAGE BUTTON">
+        <div className="relative mr-4 flex justify-between items-center text-white">
+          {
+            isGptSearchClicked&&
+          <div className="relative LANGUAGE BUTTON pr-4">
             <button
-              className="bg-pink-500 py-2 w-36  hover:bg-pink-400"
+              className="bg-pink-400 py-2 w-36  hover:bg-pink-600"
               onClick={toggleLanguageDropdown}>
               <i className="fa-solid fa-globe pr-2"></i>Language
               <i
@@ -80,23 +86,23 @@ const Header = () => {
               <div className="absolute mt-2 w-36 shadow-lg bg-white ">
                 <div className="flex flex-col">
                   {/* List of languages */}
-                  <button
-                    className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => handleLanguageChange("English")}>
-                    English
-                  </button>
-                  <button
-                    className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => handleLanguageChange("Odia")}>
-                    Odia
-                  </button>
-                  {/* Add more language options as needed */}
+                  {LANGUAGE_SUPPORTED?.lang.map((language) => {
+                    return(
+                    <button
+                    key={language}
+                      className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => handleLanguageChange(language)}>
+                      {language}
+                    </button>
+                    )
+                  })}
                 </div>
               </div>
             )}
           </div>
-          <button
-            className="bg-purple-800 px-4 py-2 rounded-md hover:bg-purple-500"
+          }
+          <button className=" GPTsearch BUTTON 
+           bg-purple-600 px-4 py-2 rounded-md hover:bg-purple-800"
             onClick={handleToggleClick}>
             {isGptSearchClicked ? (
               "Homepage"
@@ -107,7 +113,7 @@ const Header = () => {
               </>
             )}
           </button>
-          <div className="relative SIGNOUT DIV">
+          <div className="relative SIGNOUT DIV pl-4">
             <div
               className="flex items-center PROFILEPIC w-52"
               onClick={toggleDropdown}>

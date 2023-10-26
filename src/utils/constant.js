@@ -16,5 +16,8 @@ const API_OPTIONS = {
       Authorization: 'Bearer '+apiKey
     }
   };
-  
 export default API_OPTIONS
+
+export const LANGUAGE_SUPPORTED={
+  lang:["English","Hindi","Odia"]
+}
