@@ -1,10 +1,11 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addTopratedMovie } from '../store/moviesSlice'
 import { useEffect } from 'react'
 import API_OPTIONS from '../utils/constant'
 
 
 const useTopRatedMovie=()=>{
+  const topRatedMovie=useSelector(store=>store.movies.topRatedMovie)
 
     //fetch the data from TMBD nowPlaying api
     const dispatch=useDispatch()
@@ -16,7 +17,8 @@ const useTopRatedMovie=()=>{
       console.log(json.results)
     }
     useEffect(()=>{
-        getTopRatedMovies()
+    //memoization techinic
+        !topRatedMovie && getTopRatedMovies()
     },[])
 }
 

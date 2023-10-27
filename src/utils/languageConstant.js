@@ -8,8 +8,8 @@ const lang={
         ,placeHolder:"आज आप क्या देखना चाहेंगे ?"
     },
     Odia:{
-        search:"ସନ୍ଧାନ"
-        ,placeHolder:"ଆଜି ଆପଣ କ’ଣ ଦେଖିବାକୁ ଚାହାଁନ୍ତି ?"
+        search:"ସନ୍ଧାନ",
+        placeHolder:"ଆଜି ଆପଣ କ’ଣ ଦେଖିବାକୁ ଚାହାଁନ୍ତି ?"
     }
    
 

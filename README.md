@@ -54,6 +54,15 @@ npx tailwindcss init -p
 - BUILD GPT Search Page
 - BUILD GPT Search Bar
 - Bigfeature:implement the multi language feature in GPTsearchbar
+- Get Open AI Api Key
+- Gpt Search API Call
+- fetched gptMoviesSuggestions from TMDB
+- created gptSlice added data
+- Resused Movie List component to make movie suggestion container
+- Memoization
+- Added .env file
+- Adding .env file to gitignore
+
 
 
 

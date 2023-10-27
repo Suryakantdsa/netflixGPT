@@ -1,10 +1,11 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addNowPlayingMovies } from '../store/moviesSlice'
 import { useEffect } from 'react'
 import API_OPTIONS from '../utils/constant'
 
 
 const useNowPlayingMovie=()=>{
+  const nowPlayingMovies=useSelector(store=>store.movies.nowPlayingMovies)
 
     //fetch the data from TMBD nowPlaying api
     const dispatch=useDispatch()
@@ -14,7 +15,8 @@ const useNowPlayingMovie=()=>{
       dispatch(addNowPlayingMovies(json.results))
     }
     useEffect(()=>{
-      getNowPlayingMovies()
+    //memoization techinic
+     !nowPlayingMovies && getNowPlayingMovies()
     },[])
 }
 

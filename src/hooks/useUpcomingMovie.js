@@ -1,10 +1,11 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addupComingMovie } from '../store/moviesSlice'
 import { useEffect } from 'react'
 import API_OPTIONS from '../utils/constant'
 
 
 const useUpcomingMovie=()=>{
+  const upComingMovie=useSelector(store=>store.movies.upComingMovie)
 
     //fetch the data from TMBD nowPlaying api
     const dispatch=useDispatch()
@@ -15,7 +16,8 @@ const useUpcomingMovie=()=>{
       console.log(json.results)
     }
     useEffect(()=>{
-        getUpcomingMovie()
+    //memoization techinic
+       !upComingMovie && getUpcomingMovie()
     },[])
 }
 

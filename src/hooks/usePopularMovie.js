@@ -1,11 +1,11 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addPopularMovie } from '../store/moviesSlice'
 import { useEffect } from 'react'
 import API_OPTIONS from '../utils/constant'
 
 
 const usePopularMovie=()=>{
-
+const popularMovie=useSelector(store=>store.movies.popularMovie)
     //fetch the data from TMBD nowPlaying api
     const dispatch=useDispatch()
     const getPopularMovies=async()=>{
@@ -14,7 +14,8 @@ const usePopularMovie=()=>{
       dispatch(addPopularMovie(json.results))
     }
     useEffect(()=>{
-      getPopularMovies()
+    //memoization techinic
+     !popularMovie&& getPopularMovies()
     },[])
 }
 

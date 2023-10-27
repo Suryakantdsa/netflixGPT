@@ -74,7 +74,7 @@ const Header = () => {
             isGptSearchClicked&&
           <div className="relative LANGUAGE BUTTON pr-4">
             <button
-              className="bg-pink-400 py-2 w-36  hover:bg-pink-600"
+              className="bg-pink-500 py-2 w-36  hover:bg-pink-400"
               onClick={toggleLanguageDropdown}>
               <i className="fa-solid fa-globe pr-2"></i>Language
               <i
@@ -102,7 +102,7 @@ const Header = () => {
           </div>
           }
           <button className=" GPTsearch BUTTON 
-           bg-purple-600 px-4 py-2 rounded-md hover:bg-purple-800"
+           bg-purple-800 px-4 py-2 rounded-md hover:bg-purple-600"
             onClick={handleToggleClick}>
             {isGptSearchClicked ? (
               "Homepage"
@@ -127,7 +127,7 @@ const Header = () => {
               </span>
             </div>
             {isDropdownOpen && (
-              <div className="absolute mt-2 w-36 left-14  shadow-lg bg-white ">
+              <div className="absolute mt-2 w-36 left-20  shadow-lg bg-white ">
                 <div className="flex flex-col">
                   {/* List of languages */}
                   <button
