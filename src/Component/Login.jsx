@@ -95,6 +95,8 @@ const Login = () => {
         <h1 className="text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
+
+        
         {!isSignInForm && (
           <input
             ref={fullname}

@@ -9,6 +9,7 @@ import useUpcomingMovie from "../hooks/useUpcomingMovie";
 import GPTpage from "./GPTpage";
 import { useSelector } from "react-redux";
 
+
 const Browse = () => {
   const isGptSearchClicked = useSelector((store) => store.gpt.isGPTClicked);
   useNowPlayingMovie();
@@ -16,8 +17,9 @@ const Browse = () => {
   useTopRatedMovie();
   useUpcomingMovie();
   return (
-    <div className="">
-      <Header />
+    <div className="flex flex-col min-h-screen">
+    <Header />
+    <div className="flex-grow">
       {isGptSearchClicked ? (
         <GPTpage />
       ) : (
@@ -27,7 +29,9 @@ const Browse = () => {
         </>
       )}
     </div>
-  );
+    
+  </div>
+);
 };
 
 export default Browse;

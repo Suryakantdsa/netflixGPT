@@ -59,56 +59,57 @@ const Header = () => {
     setIsLangDropdownOpen(false);
   };
   const handleLanguageChange = (lang) => {
-    setIsLangDropdownOpen(false)
-    dispatch(changeLanguage(lang))
+    setIsLangDropdownOpen(false);
+    dispatch(changeLanguage(lang));
   };
 
   return (
-    <div className="absolute z-10 bg-gradient-to-b from-black w-full md:p-4 flex justify-between flex-col md:flex-row bg-black md:bg-transparent items-center">
+    <div className="absolute z-10 bg-gradient-to-b from-black w-full p-4 flex sm:justify-between  flex-col md:flex-row bg-black md:bg-transparent items-center text-base">
       <div>
         <img className="w-44" src={LOGO} alt="Netflix Logo" />
       </div>
       {user && (
-        <div className="relative md:mr-4 flex md:justify-between items-center text-white pb-6 md:p-0">
-          {
-            isGptSearchClicked&&
-          <div className="relative LANGUAGE BUTTON pr-4">
-            <button
-              className="bg-pink-500 md:py-2 md:w-36 py-1 w-32 hover:bg-pink-400"
-              onClick={toggleLanguageDropdown}>
-              <i className="fa-solid fa-globe pr-2"></i>Language
-              <i
-                className={`pl-2 fa-solid ${
-                  isLangDropdownOpen ? "fa-caret-up" : "fa-caret-down"
-                }`}></i>{" "}
-            </button>
-            {isLangDropdownOpen && (
-              <div className="absolute mt-2 md:w-36 w-32 shadow-lg bg-white ">
-                <div className="flex flex-col">
-                  {/* List of languages */}
-                  {LANGUAGE_SUPPORTED?.lang.map((language) => {
-                    return(
-                    <button
-                    key={language}
-                      className=" md:px-4 md:py-2 px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => handleLanguageChange(language)}>
-                      {language}
-                    </button>
-                    )
-                  })}
+        <div className="relative md:mr-4 flex sm:justify-between justify-center items-center text-white text-base">
+          {isGptSearchClicked && (
+            <div className="relative LANGUAGE BUTTON pr-4">
+              <button
+                className="bg-pink-500 md:py-2 sm:w-36  py-1 w-14 hover:bg-pink-400"
+                onClick={toggleLanguageDropdown}>
+                <i className="fa-solid fa-globe pr-2"></i>
+                <span className="sm:inline-block hidden">Language</span>
+                <i
+                  className={`pl-2 fa-solid ${
+                    isLangDropdownOpen ? "fa-caret-up" : "fa-caret-down"
+                  }`}></i>{" "}
+              </button>
+              {isLangDropdownOpen && (
+                <div className="absolute mt-2 md:w-36 w-32 shadow-lg bg-white ">
+                  <div className="flex flex-col">
+                    {/* List of languages */}
+                    {LANGUAGE_SUPPORTED?.lang.map((language) => {
+                      return (
+                        <button
+                          key={language}
+                          className=" md:px-4 md:py-2 px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => handleLanguageChange(language)}>
+                          {language}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-          }
-          <button className=" GPTsearch BUTTON 
-           bg-purple-800 md:px-4 md:py-2 px-2 py-1 rounded-sm md:rounded-md hover:bg-purple-600"
+              )}
+            </div>
+          )}
+          <button
+            className=" GPTsearch BUTTON 
+           bg-purple-800 sm:px-4 sm:py-2 px-1 py-1 rounded-sm md:rounded-md hover:bg-purple-600"
             onClick={handleToggleClick}>
             {isGptSearchClicked ? (
               "Homepage"
             ) : (
               <>
-               Try GPTsearch
+                Try GPTsearch
                 <i className="fa-solid fa-magnifying-glass pl-2"></i>
               </>
             )}
@@ -122,7 +123,7 @@ const Header = () => {
                 src={PROFILE_AVATAR}
                 alt="User Icon"
               />
-              <span className="font-bold md:text-xl text-white pl-4 cursor-pointer">
+              <span className="font-bold sm:text-xl text-white sm:pl-4 pl-1 cursor-pointer">
                 {user.displayName}
               </span>
             </div>
