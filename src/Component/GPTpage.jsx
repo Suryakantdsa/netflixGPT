@@ -6,7 +6,7 @@ const GPTpage = () => {
   return (
     <>
       <div className="fixed -z-20 bg-opacity-25 ">
-        <img src={BACKGROUND_IMG} alt="background-img" />
+        <img src={BACKGROUND_IMG} alt="background-img"  className="w-screen h-screen object-cover"/>
       </div>
       <GPTsearchBar/>
       <GPTmovieSuggestion/>

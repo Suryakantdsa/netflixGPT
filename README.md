@@ -62,6 +62,7 @@ npx tailwindcss init -p
 - Memoization
 - Added .env file
 - Adding .env file to gitignore
+- made the app responsive anywhere 
 
 
 

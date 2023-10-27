@@ -64,17 +64,17 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute z-10 bg-gradient-to-b from-black w-full p-4 flex justify-between items-center">
+    <div className="absolute z-10 bg-gradient-to-b from-black w-full md:p-4 flex justify-between flex-col md:flex-row bg-black md:bg-transparent items-center">
       <div>
         <img className="w-44" src={LOGO} alt="Netflix Logo" />
       </div>
       {user && (
-        <div className="relative mr-4 flex justify-between items-center text-white">
+        <div className="relative md:mr-4 flex md:justify-between items-center text-white pb-6 md:p-0">
           {
             isGptSearchClicked&&
           <div className="relative LANGUAGE BUTTON pr-4">
             <button
-              className="bg-pink-500 py-2 w-36  hover:bg-pink-400"
+              className="bg-pink-500 md:py-2 md:w-36 py-1 w-32 hover:bg-pink-400"
               onClick={toggleLanguageDropdown}>
               <i className="fa-solid fa-globe pr-2"></i>Language
               <i
@@ -83,14 +83,14 @@ const Header = () => {
                 }`}></i>{" "}
             </button>
             {isLangDropdownOpen && (
-              <div className="absolute mt-2 w-36 shadow-lg bg-white ">
+              <div className="absolute mt-2 md:w-36 w-32 shadow-lg bg-white ">
                 <div className="flex flex-col">
                   {/* List of languages */}
                   {LANGUAGE_SUPPORTED?.lang.map((language) => {
                     return(
                     <button
                     key={language}
-                      className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className=" md:px-4 md:py-2 px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => handleLanguageChange(language)}>
                       {language}
                     </button>
@@ -102,32 +102,32 @@ const Header = () => {
           </div>
           }
           <button className=" GPTsearch BUTTON 
-           bg-purple-800 px-4 py-2 rounded-md hover:bg-purple-600"
+           bg-purple-800 md:px-4 md:py-2 px-2 py-1 rounded-sm md:rounded-md hover:bg-purple-600"
             onClick={handleToggleClick}>
             {isGptSearchClicked ? (
               "Homepage"
             ) : (
               <>
-                GPTsearch
+               Try GPTsearch
                 <i className="fa-solid fa-magnifying-glass pl-2"></i>
               </>
             )}
           </button>
           <div className="relative SIGNOUT DIV pl-4">
             <div
-              className="flex items-center PROFILEPIC w-52"
+              className="flex items-center PROFILEPIC md:w-52 w-40"
               onClick={toggleDropdown}>
               <img
-                className="w-12 h-12 rounded-full cursor-pointer"
+                className="md:w-12 md:h-12 w-8 h-8 rounded-full cursor-pointer"
                 src={PROFILE_AVATAR}
                 alt="User Icon"
               />
-              <span className="font-bold text-xl text-white pl-4 cursor-pointer">
+              <span className="font-bold md:text-xl text-white pl-4 cursor-pointer">
                 {user.displayName}
               </span>
             </div>
             {isDropdownOpen && (
-              <div className="absolute mt-2 w-36 left-20  shadow-lg bg-white ">
+              <div className="absolute mt-2 w-36 md:left-20  left-8 shadow-lg bg-white ">
                 <div className="flex flex-col">
                   {/* List of languages */}
                   <button

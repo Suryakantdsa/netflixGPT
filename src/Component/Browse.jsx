@@ -16,7 +16,7 @@ const Browse = () => {
   useTopRatedMovie();
   useUpcomingMovie();
   return (
-    <div>
+    <div className="">
       <Header />
       {isGptSearchClicked ? (
         <GPTpage />

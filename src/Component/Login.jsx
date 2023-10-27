@@ -14,11 +14,13 @@ import { BACKGROUND_IMG, PROFILE_AVATAR } from "../utils/constant";
 const Login = () => {
   const [isSignInForm, setisSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isButtonClicked,setIsButtonClicked]=useState(false)
   const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
   const fullname = useRef(null);
   const handleButtonCLick = () => {
+    setIsButtonClicked(true)
     setErrorMessage(null);
     const message = useCheckValidate(
       email.current.value,
@@ -50,6 +52,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
+              setIsButtonClicked(false)
               alert("Account created sucessfully...👍👍");
             })
             .catch((error) => {
@@ -70,6 +73,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
+          setIsButtonClicked(false)
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -82,12 +86,12 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute">
-        <img src={BACKGROUND_IMG} alt="background-img" />
+      <div className="absolute ">
+        <img src={BACKGROUND_IMG} alt="background-img"  className="h-screen object-cover"/>
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute w-3/12  right-0 left-0 bg-black bg-opacity-80 my-28 mx-auto text-white rounded-lg p-12">
+        className="absolute md:w-[40%] lg:w-[30%] w-[80%]  right-0 left-0 bg-black bg-opacity-80 my-28 mx-auto text-white rounded-lg p-6 md:p-8 lg:p-12">
         <h1 className="text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
@@ -113,7 +117,7 @@ const Login = () => {
         />
         <button
           onClick={handleButtonCLick}
-          className="w-full p-4 my-6 bg-red-600 font-bold rounded-sm">
+          className={`w-full p-4 my-6 bg-red-600 font-bold rounded-sm ${isButtonClicked ? 'animate-pulse' : ''}`}>
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         {<p className="p-2 text-red-500 font-bold "> {errorMessage}</p>}
