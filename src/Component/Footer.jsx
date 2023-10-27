@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="flex justify-center w-full">
           <p className="p-4"> Made with ❤️ by SURYAKANT</p> 
         </div>
-        <p className="text-center">© Copyright netfilxgpt-bb0b3.web.app . All Rights Reserved</p>
+        <p className="text-center">© Copyright netfilxgpt-bb0b3.web.app  All Rights Reserved</p>
       </footer>
   )
 }
